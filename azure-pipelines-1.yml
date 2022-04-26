@@ -1,0 +1,26 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+
+- bash: pip install -r pylint
+  displayName: Install packages for build
+
+- bash: find $(srcDirectory) $(testsDirectory) -type f -name "*.py" | xargs pylint
+  displayName: "Linting: pylint"
+
+
+- bash: flake8
+  displayName: "Linting: flake8"
+  workingDirectory: $(srcDirectory)
