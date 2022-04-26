@@ -1,0 +1,9 @@
+anyio==3.5.0
+fastapi==0.75.2
+idna==2.8
+pydantic==1.9.0
+requests==2.23.0
+sniffio==1.2.0
+starlette==0.17.1
+typing-extensions==4.2.0
+uvicorn==0.17.6
