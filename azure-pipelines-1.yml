@@ -16,11 +16,3 @@ steps:
 
 - bash: pip install -r pylint
   displayName: Install packages for build
-
-- bash: find $(srcDirectory) $(testsDirectory) -type f -name "*.py" | xargs pylint
-  displayName: "Linting: pylint"
-
-
-- bash: flake8
-  displayName: "Linting: flake8"
-  workingDirectory: $(srcDirectory)
