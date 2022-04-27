@@ -1,56 +1,59 @@
-import enum
-import json
 import time
-import traceback
 
-import requests
 from fastapi import FastAPI
-from requests import Response
+from fastapi_utils.tasks import repeat_every
 
-
-class Currency(enum.Enum):
-    USD = 0
-    EUR = 1
-
-
-class BitcoinRequests:
-    base_url: str = 'https://api.alternative.me/v2/ticker/bitcoin/'
-
-    def get(self, params: str):
-        return requests.get(f'{self.base_url}?{params}')
-
-
-class BitcoinConverter:
-    _bc_requests: BitcoinRequests = BitcoinRequests()
-
-    def convert(self, currency: Currency) -> Response:
-        res = self._bc_requests.get(f'convert={currency.name}')
-        return (int)(json.loads(res.content)['data']['1']['quotes'][currency.name]['price'])
-
-    def convert_to_usd(self):
-        return self.convert(currency=Currency.USD)
-
+from bicointer_converter import BitcoinConverter
+from redis_util import RedisUtil
 
 app = FastAPI()
 _bc_converter = BitcoinConverter()
+ru = RedisUtil()
+average = 0
+bc_rate_every_2sec = 0
 
-@app.get("/")
-def root():
-    return {"Welcome"}
+
+@app.get("/current", status_code=200)
+def get_btc_rate():
+    return bc_rate_every_2sec
 
 
-@app.get("/convert/{currency}")
-def convert(currency: str):
+@app.get("/average")
+def get_current_avg():
+    return average
+
+
+@app.on_event('startup')
+@repeat_every(seconds=60*10)
+def get_average():
+    conn = ru.connect_to_redis()
+    lst = conn.mget(conn.keys())
+    print(f'all values are {lst}')
+    conn.flushall()
+    _get_average(lst)
+    print(f'average is { int(average) }')
+
+
+@app.on_event('startup')
+@repeat_every(seconds=10)
+def get_current_btc_rate():
+    global bc_rate_every_2sec
+    current = int(time.time())
     try:
-        c = Currency[currency.upper()]
-        response = _bc_converter.convert(c)
-        write_to_log(str(response))
-        return response
-    except:
-        return {f"Error is {traceback.format_exc()} Cannot find currency in lists supported is only {list(map(lambda c: c.name, Currency))}"}
+        bc_rate_every_2sec = _set_btc_rate(current)
+    except Exception as e:
+        print(f'cannot get value at {current} got exception {e}')
+    return {"200"}
 
 
-def write_to_log(message=""):
-    with open("log.txt", mode="a") as log:
-        content = f"[{int(time.time())}] [{message}]\n"
-        log.write(content)
+def _set_btc_rate(current):
+    r = ru.connect_to_redis()
+    btc_rate = _bc_converter.convert_to_usd()
+    r.set(current, btc_rate)
+    return btc_rate
+
+
+def _get_average(lst):
+    global average
+    total = sum([int(i) for i in lst if type(i) == int or i.isdigit()])
+    average = total / len(lst)
