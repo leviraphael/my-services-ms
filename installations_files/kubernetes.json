@@ -1,0 +1,50 @@
+{
+    "apiVersion":  "vlabs",
+    "properties":  {
+                       "masterProfile":  {
+                                             "count":  1,
+                                             "dnsPrefix":  "wink8raphael",
+                                             "vmSize":  "Standard_D2_v3"
+                                         },
+                       "agentPoolProfiles":  [
+                                                 {
+                                                     "name":  "windowspool2",
+                                                     "count":  2,
+                                                     "vmSize":  "Standard_D2_v3",
+                                                     "availabilityProfile":  "AvailabilitySet",
+                                                     "osType":  "Windows",
+                                                     "osDiskSizeGB":  128,
+                                                     "extensions":  [
+                                                                        {
+                                                                            "name":  "winrm"
+                                                                        }
+                                                                    ]
+                                                 }
+                                             ],
+                       "windowsProfile":  {
+                                              "adminUsername":  <username>,
+                                              "adminPassword":  <password>,
+                                              "sshEnabled":  true
+                                          },
+                       "linuxProfile":  {
+                                            "adminUsername":  <admin>,
+                                            "ssh":  {
+                                                        "publicKeys":  [
+                                                                           {
+                                                                               "keyData":  <key>
+                                                                           }
+                                                                       ]
+                                                    }
+                                        },
+                       "servicePrincipalProfile":  {
+                                                       "clientId":  <client_id>,
+                                                       "secret":  <secret>
+                                                   },
+                       "extensionProfiles":  [
+                                                 {
+                                                     "name":  "winrm",
+                                                     "version":  "v1"
+                                                 }
+                                             ]
+                   }
+}
