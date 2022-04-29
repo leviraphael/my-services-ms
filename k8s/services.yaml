@@ -5,7 +5,7 @@ metadata:
   labels:
     app: my-services
 spec:
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       name: my-services
@@ -14,10 +14,15 @@ spec:
     spec:
       containers:
       - name: service1
-        image: rlcontainertest.azurecr.io/service1:latest
+        image: <serviceA_image>
         imagePullPolicy: Always
         ports:
-          - containerPort: 5001
+          - containerPort: 80
+      - name: service2
+        image: <serviceB_image>
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 5000
       nodeSelector:
         "kubernetes.io/os": linux
       imagePullSecrets:
@@ -38,4 +43,3 @@ spec:
     port: 3000
     targetPort: 8080
     name: http
-  type: NodePort
