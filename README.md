@@ -70,7 +70,7 @@ az group create --location centralus --name k8s-rl
 Create a Kubernetes Cluster using Azure API (file )
 
 ```bash
-aks-engine.exe generate "https://github.com/leviraphael/my-services-ms/installations_files/kubernetes.json"
+aks-engine.exe generate "https://github.com/leviraphael/my-services-ms/blob/main/installations_files/kubernetes.json"
 ```
 
 It will generate an output directory with all required files to deploy your cluster
