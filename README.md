@@ -34,7 +34,15 @@ Using:
 https://github.com/leviraphael/my-services-ms/blob/main/azure-pipelines.yml
 ```
 
-Push your docker files to your ACR.
+Push your docker files to your ACR, change the value with your ACR values you've created previously
+
+```bash
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: '<service_connection>'
+  imageRepository: '<image_repo>'
+  containerRegistry: '<container_name>.azurecr.io'
+```
 
 Note: To this pipeline we can easily add code inspection like [Pylint](https://pylint.pycqa.org/en/latest/).
 
