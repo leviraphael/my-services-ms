@@ -23,14 +23,20 @@ Service A should not be able to communicate with Service B.
 
 Create an azure container repository 
 
+```bash
+az acr create --resource-group <resource_group> \
+  --name <container_name> --sku Basic
+```
+
 Using:
 
 ```bash
 https://github.com/leviraphael/my-services-ms/azure-pipelines.yml
 ```
-You can create push docker files to your ACR.
 
-To this pipeline we can easily add code inspection like [Pylint](https://pylint.pycqa.org/en/latest/).
+Push your docker files to your ACR.
+
+Note: To this pipeline we can easily add code inspection like [Pylint](https://pylint.pycqa.org/en/latest/).
 
 Also the unit tests located [here](https://github.com/leviraphael/my-services-ms/unittests) should be run before releasing the Docker.
 
