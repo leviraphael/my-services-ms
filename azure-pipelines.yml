@@ -10,9 +10,9 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'a94c9910-a5ac-4632-9dcc-d68bd39d33bc'
-  imageRepository: 'leviraphaelmyservicesms'
-  containerRegistry: 'rlcontainertest.azurecr.io'
+  dockerRegistryServiceConnection: '<service_connection>'
+  imageRepository: '<image_repo>'
+  containerRegistry: '<container_name>.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
 
