@@ -13,4 +13,11 @@ spec:
             name: service1
             port:
               number: 80
+      - path: /service2
+        pathType: Prefix
+        backend:
+          service:
+            name: service2
+            port:
+              number: 5000
   ingressClassName: nginx
