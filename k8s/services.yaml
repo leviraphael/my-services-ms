@@ -26,7 +26,7 @@ spec:
       nodeSelector:
         "kubernetes.io/os": linux
       imagePullSecrets:
-      - name: azure-secret
+      - name: <azure-secret>
   selector:
     matchLabels:
       app: my-services
