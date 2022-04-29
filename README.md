@@ -31,7 +31,7 @@ az acr create --resource-group <resource_group> \
 Using:
 
 ```bash
-https://github.com/leviraphael/my-services-ms/azure-pipelines.yml
+https://github.com/leviraphael/my-services-ms/blob/main/azure-pipelines.yml
 ```
 
 Push your docker files to your ACR.
