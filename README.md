@@ -109,4 +109,4 @@ http://<ingress_external_ip>/service1/average
 http://<ingress_external_ip>/service2/
 ``` 
 
-Using kubectl we can also manage the auto-scaling per need 
+Using kubectl we can also manage the auto-scaling per need (also it can be defined in your yaml files after adjusting it)
