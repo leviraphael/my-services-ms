@@ -46,7 +46,7 @@ variables:
 
 Note: To this pipeline we can easily add code inspection like [Pylint](https://pylint.pycqa.org/en/latest/).
 
-Also the unit tests located [here](https://github.com/leviraphael/my-services-ms/unittests) should be run before releasing the Docker.
+Also the unit tests located [here](https://github.com/leviraphael/my-services-ms/tree/main/unittests) should be run before releasing the Docker.
 
 ```python
     # Convert to USD - no Currency error
