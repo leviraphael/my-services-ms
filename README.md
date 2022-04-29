@@ -92,7 +92,7 @@ Now you can access/ssh your cluster
 
 To manage your cluster deployment it's recommended to use [Helm](https://helm.sh/)
 
-For this exercise I've used kubctl commands to deploy it 
+For this exercise I've used kubectl commands to deploy it 
 
 ```bash
 kubectl apply -f https://github.com/leviraphael/my-services-ms/k8s/services.yaml
