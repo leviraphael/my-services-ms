@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-service2
+  labels:
+    app: my-service2
+spec:
+  replicas: 2
+  template:
+    metadata:
+      name: my-service2
+      labels:
+        app: my-service2
+    spec:
+      containers:
+      - name: service2
+        image: <serviceB_image>
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 5000
+      nodeSelector:
+        "kubernetes.io/os": linux
+      imagePullSecrets:
+      - name: <azure-secret>
+  selector:
+    matchLabels:
+      app: my-service2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service2-svc
+spec:
+  selector:
+    app: my-service2
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 5000
+    name: http
