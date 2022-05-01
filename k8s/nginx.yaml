@@ -19,5 +19,5 @@ spec:
           service:
             name: service2
             port:
-              number: 5000
+              number: 3000
   ingressClassName: nginx
