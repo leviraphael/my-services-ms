@@ -96,6 +96,7 @@ For this exercise I've used kubectl commands to deploy it
 
 ```bash
 kubectl apply -f https://github.com/leviraphael/my-services-ms/k8s/services.yaml
+kubectl apply -f https://github.com/leviraphael/my-services-ms/k8s/service2.yaml
 kubectl apply -f https://github.com/leviraphael/my-services-ms/k8s/nginx.yaml
 ```
 
