@@ -5,7 +5,7 @@ metadata:
   labels:
     app: my-services
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       name: my-services
