@@ -12,7 +12,7 @@ spec:
           service:
             name: service1
             port:
-              number: 80
+              number: 4000
       - path: /service2
         pathType: Prefix
         backend:
